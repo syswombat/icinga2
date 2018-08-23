@@ -2,19 +2,23 @@
 # cd /usr/lib/nagios/plugins/
 # wget 
 # chmod +x check_apt_wrapper.sh
-# Purpose: Script wrapper for the ITL check_yum plugin to add additional output (names of the packages to be updated)
+# Original Script by @watermelone (monitoring-portal.com) for yum update
+# i did only change the script to work also with apt (Debian 9)
+#
+# Purpose: Script wrapper for the ITL check_apt plugin to add additional output (names of the packages to be updated)
 # as well give the ability to handle states as you please
 # Note: This is also meant as kind of a "beginner's tutorial" for script wrappers with Icinga.
 # Feel free to ask me (@Watermelon) for any tips or questions you might have after you read through this script's functions. Enjoy!
-# Exit codes: OK(0), WARNING(1), CRITICAL(2), UNKNOWN(3)
+####################################################################################################################################
 
+# Exit codes: OK(0), WARNING(1), CRITICAL(2), UNKNOWN(3)
 # function to help the user out with the usage of this script
 
 usage() {
         exit 3;
         }
  
- # check for command line arguments
+# check for command line arguments
  while getopts ":t:s:h:" option; do
          case "${option}" in
                  t) timeout=${OPTARG};;
@@ -24,17 +28,17 @@ usage() {
           esac
  done
  
- # Resets position of first non-option argument
+# Resets position of first non-option argument
        shift "$((OPTIND-1))"
  
- # ensures the timeout is set as default 60 seconds if not supplied via command
+# ensures the timeout is set as default 60 seconds if not supplied via command
  if [ -z "${timeout}" ]; then
             timeout=60
  fi
  
  CMD=""
  
- # handle "s" flag
+# handle "s" flag
     if [ -z "${security}" ]; then
               security="off"
      elif [[ "$security" == "on" ]]; then
@@ -46,7 +50,6 @@ usage() {
     fi
  
     EXITCODE="0"
- 
 
 # gets the number of updates from the original check_apt command
     NUMUPDATES="$(/usr/lib/nagios/plugins/check_apt -t ${timeout} 2>/dev/null | awk '{print $1 ";" $5}')"
