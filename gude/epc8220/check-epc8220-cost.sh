@@ -14,32 +14,32 @@
 #############################################################################
 Variable and to define/change
 
-device.snmp.h      = 10.147.42.31          # Power Control IP Address
-device.snmp.c      = public                # Community String
-device.snmp.v      = 2c                    # SNMP Version // 1 not supported
-device.snmp.u      =                       # SNMPv3 User
-device.snmp.A      =                       # SNMPv3 Password
-device.snmp.a      =                       # SNMPv3 set authentication protocol (MD5|SHA)
-device.snmp.x      =                       # SNMPv3 set privacy protocol (DES|AES)
-device.snmp.w      =                       # Icinga2 warning
-device.snmp.c      =                       # Icinga2 critical
+device.snmp.h= 10.147.42.31          # Power Control IP Address
+device.snmp.c= public                # Community String
+device.snmp.v= 2c                    # SNMP Version // 1 not supported
+device.snmp.u=                       # SNMPv3 User
+device.snmp.A=                       # SNMPv3 Password
+device.snmp.a=                       # SNMPv3 set authentication protocol (MD5|SHA)
+device.snmp.x=                       # SNMPv3 set privacy protocol (DES|AES)
+device.snmp.w=                       # Icinga2 warning
+device.snmp.c=                       # Icinga2 critical
 
-device.snmp.retries =                      # SNMPv3 set the number of retries
-device.snmp.timeout =                      # SNMPv3 set the request timeout (in seconds)
+device.snmp.retries=                      # SNMPv3 set the number of retries
+device.snmp.timeout=                      # SNMPv3 set the request timeout (in seconds)
 
-Niedertarif.start  = 18:00
-Niedertarif.stop   = 05:00
+Niedertarif.start= 18:00
+Niedertarif.stop= 05:00
 
-Hochtarif.start    = 05:00
-Hochtarif.stop     = 18:00
+Hochtarif.start= 05:00
+Hochtarif.stop= 18:00
 
-Hochtarif.wert     = 8.50                  # SFr. /kWh
-Niedertarif.wert   = 5.50                  # SFr. /kwh
+Hochtarif.wert= 8.50                    # SFr. /kWh
+Niedertarif.wert= 5.50                  # SFr. /kwh
 
-Zeitzone           = Schweiz               
-Zeit.ntp.source    = 10.147.42.6           # IP or Hostname of a NTP Server
+Zeitzone= Schweiz               
+Zeit.ntp.source= 10.147.42.6           # IP or Hostname of a NTP Server
 
-Kosten.steps	   = 5 Minuten             
+Kosten.steps= 5                        # Minuten             
 ============================================
 
 
