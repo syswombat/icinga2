@@ -10,7 +10,14 @@
 # Note: This is also meant as kind of a "beginner's tutorial" for script wrappers with Icinga.
 # Feel free to ask me (@Watermelon) for any tips or questions you might have after you read through this script's functions. Enjoy!
 ####################################################################################################################################
-
+#Place for notes: will be deleted
+#      apt-get -qq update && apt-get -qq -s upgrade               (--dry-run, --recon)
+#      apt list --upgradable
+#
+#
+#
+#
+################################################################################################################################
 # Exit codes: OK(0), WARNING(1), CRITICAL(2), UNKNOWN(3)
 # function to help the user out with the usage of this script
 
