@@ -13,7 +13,7 @@ Variable and to define/change
 
 device.snmp.h      = 10.147.42.31          # Power Control IP Address
 device.snmp.c      = public                # Community String
-device.snmp.v      = 2c                    # SNMP Version // 1 nicht supported
+device.snmp.v      = 2c                    # SNMP Version // 1 not supported
 device.snmp.u      =                       # SNMPv3 User
 device.snmp.A      =                       # SNMPv3 Password
 device.snmp.a      =                       # set authentication protocol (MD5|SHA)
