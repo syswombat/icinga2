@@ -49,8 +49,9 @@ Kosten.steps= 5                        # Minuten
 
 # snmpwalk -v -c -h 
 if device.snmp.v =2*
-snmpget -v 2c -c public 10.147.42.31 iso.3.6.1.4.1.28507.38.1.5.1.2.1.3.1 | awk '{$4/1000}' 
-'{print $4}'
+snmpget -v 2c -c public 10.147.42.31 iso.3.6.1.4.1.28507.38.1.5.1.2.1.3.1 | awk '{print $4}'
+# output is 755487 but should be divided by 1000 and be like 755.487
+
 else
 snmpget........................ 
 
