@@ -1,6 +1,6 @@
 #!/bin/bash
 # cd /usr/lib/nagios/plugins/
-# wget 
+# wget https://raw.githubusercontent.com/syswombat/icinga2/master/apt-wrapper/check_apt_wrapper.sh
 # chmod +x check_apt_wrapper.sh
 # Original Script by @watermelone (monitoring-portal.com) for yum update
 # i did only change the script to work also with apt (Debian 9)
