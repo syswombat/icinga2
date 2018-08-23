@@ -1,4 +1,4 @@
-# Icinga2 Plugin to Monitor the Cost (Money) of the 2 Power Input of 
+SNM<dn# Icinga2 Plugin to Monitor the Cost (Money) of the 2 Power Input of 
 # gude-8220-1
 # Expert Power Control 8220-1 - v1.0.4
 # gude 8220 has two mesurable Power Input called A and B
@@ -16,13 +16,13 @@ device.snmp.c      = public                # Community String
 device.snmp.v      = 2c                    # SNMP Version // 1 not supported
 device.snmp.u      =                       # SNMPv3 User
 device.snmp.A      =                       # SNMPv3 Password
-device.snmp.a      =                       # set authentication protocol (MD5|SHA)
-device.snmp.x      =                       # set privacy protocol (DES|AES)
-device.snmp.w      = 
-device.snmp.c      =
+device.snmp.a      =                       # SNMPv3 set authentication protocol (MD5|SHA)
+device.snmp.x      =                       # SNMPv3 set privacy protocol (DES|AES)
+device.snmp.w      =                       # Icinga2 warning
+device.snmp.c      =                       # Icinga2 critical
 
-device.snmp.retries =                      # set the number of retries
-device.snmp.timeout =                      # set the request timeout (in seconds)
+device.snmp.retries =                      # SNMPv3 set the number of retries
+device.snmp.timeout =                      # SNMPv3 set the request timeout (in seconds)
 
 Niedertarif.start  = 18:00
 Niedertarif.stop   = 05:00
