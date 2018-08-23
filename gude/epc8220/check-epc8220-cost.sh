@@ -21,11 +21,14 @@ device.snmp.u=                       # SNMPv3 User
 device.snmp.A=                       # SNMPv3 Password
 device.snmp.a=                       # SNMPv3 set authentication protocol (MD5|SHA)
 device.snmp.x=                       # SNMPv3 set privacy protocol (DES|AES)
-device.snmp.w=                       # Icinga2 warning
+device.snmp.w=                       # Icinga2 warning 
 device.snmp.c=                       # Icinga2 critical
 
 device.snmp.retries=                      # SNMPv3 set the number of retries
 device.snmp.timeout=                      # SNMPv3 set the request timeout (in seconds)
+
+A.iso= iso.3.6.1.4.1.28507.38.1.5.1.2.1.3.1 # ISO Path to the Bank A Power input
+B.iso= iso.3.6.1.4.1.28507.38.1.5.1.2.1.3.2 # ISO Path to the Bank B Power input
 
 Niedertarif.start= 18:00
 Niedertarif.stop= 05:00
