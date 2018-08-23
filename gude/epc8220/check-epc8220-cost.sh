@@ -1,4 +1,4 @@
-SNM<dn# Icinga2 Plugin to Monitor the Cost (Money) of the 2 Power Input of 
+# Icinga2 Plugin to Monitor the Cost (Money) of the 2 Power Input of 
 # gude-8220-1
 # Expert Power Control 8220-1 - v1.0.4
 # gude 8220 has two mesurable Power Input called A and B
@@ -39,10 +39,9 @@ Zeit.ntp.source    = 10.147.42.6           # IP or Hostname of a NTP Server
 Kosten.steps	   = 5 Minuten             
 ============================================
 
-Zeit.time = 12:05  = Hochtarif = 8.50
 
 
-snmpwalk -v -c -h 
+# snmpwalk -v -c -h 
 if device.snmp.v =2*
 snmpget -v 2c -c public 10.147.42.31 iso.3.6.1.4.1.28507.38.1.5.1.2.1.3.1 | awk '{$4/1000}' 
 '{print $4}'
