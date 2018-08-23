@@ -1,5 +1,5 @@
 # Icinga2 Plugin to Monitor the Cost (Money) of the 2 Power Input of 
-# gude-8220-1
+# gude-8220-1 (https://www.gude.info/unternehmen/news/news/article/die-firma-gude-praesentiert-ihre-neueste-generation-an-intelligenten-power-distribution-units-pdus.html)
 # Expert Power Control 8220-1 - v1.0.4
 # gude 8220 has two mesurable Power Input called A and B
 # 
