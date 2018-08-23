@@ -2,12 +2,16 @@
 # gude-8220-1
 # Expert Power Control 8220-1 - v1.0.4
 # gude 8220 has two mesurable Power Input called A and B
-#  
-# 
-#    ***  | awk '{print $4}' | cut -c 2- )
 # 
 # version: 0.01 | 21.08.2018 14:35 Author: Vincent Kocher | www.wombat.ch
-==================================================================
+# ==================================================================
+# a place for notes if it runs will be deleted:
+#    ***  | awk '{print $4}' | cut -c 2- )
+#
+#
+#
+#
+#############################################################################
 Variable and to define/change
 
 device.snmp.h      = 10.147.42.31          # Power Control IP Address
