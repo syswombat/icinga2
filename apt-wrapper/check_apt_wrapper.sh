@@ -1,5 +1,7 @@
-# "/usr/lib/nagios/plugins/check_apt_wrapper.sh" 106L, 3262C
 #!/bin/bash
+# cd /usr/lib/nagios/plugins/
+# wget 
+# chmod +x check_apt_wrapper.sh
 # Purpose: Script wrapper for the ITL check_yum plugin to add additional output (names of the packages to be updated)
 # as well give the ability to handle states as you please
 # Note: This is also meant as kind of a "beginner's tutorial" for script wrappers with Icinga.
