@@ -2,7 +2,6 @@
 # gude-8220-1
 # Expert Power Control 8220-1 - v1.0.4
 # gude 8220 has two mesurable Power Input called A and B
-# Icinga2 Plugin to Monitor the Cost (Money) of the 2 Power Input
 #  
 # 
 #    ***  | awk '{print $4}' | cut -c 2- )
