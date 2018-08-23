@@ -30,8 +30,8 @@ Niedertarif.stop   = 05:00
 Hochtarif.start    = 05:00
 Hochtarif.stop     = 18:00
 
-Hochtarif.wert     = 8.50                  # /kWh
-Niedertarif.wert   = 5.50                  # /kwh
+Hochtarif.wert     = 8.50                  # SFr. /kWh
+Niedertarif.wert   = 5.50                  # SFr. /kwh
 
 Zeitzone           = Schweiz               
 Zeit.ntp.source    = 10.147.42.6           # IP or Hostname of a NTP Server
