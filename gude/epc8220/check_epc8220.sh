@@ -11,7 +11,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# contact the author directly for more information at: matthias@xcontrol.de
 ##########################################################################################
 #Version 0.0.1
 plgVer=0.0.1
@@ -21,7 +20,7 @@ if [ ! "$#" == "5" ]; then
         echo "check_epc8220 "$plgVer
         echo
       	echo
-	      echo " Example for fans: ./check_epc8220.sh 127.0.0.1 public uptime"
+	      echo " Example for fans: ./check_epc8220.sh 127.0.0.1 public systemuptime"
 	      
 	      echo
         exit 3
