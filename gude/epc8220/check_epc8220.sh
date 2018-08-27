@@ -18,11 +18,11 @@ plgVer=0.0.1
 
 if [ ! "$#" == "5" ]; then
         echo
-        echo "Check_QNAP3 "$plgVer
+        echo "check_epc8220 "$plgVer
         echo
       	echo
-	      echo " Example for fans: ./check_qnap3.sh 127.0.0.1 public fans 2000 1900"
-	      echo "                   critical and warning are minimum speed in rpm for fans"
+	      echo " Example for fans: ./check_epc8220.sh 127.0.0.1 public uptime"
+	      
 	      echo
         exit 3
 fi
@@ -113,26 +113,6 @@ elif [ "$strpart" == "cpu" ]; then
                 exit 0
         fi
 	
-# CPUTEMP ----------------------------------------------------------------------------------------------------------------------------------------------
-elif [ "$strpart" == "cputemp" ]; then
-    	TEMP0=$(snmpget -v2c -c "$strCommunity" $strHostname  .1.3.6.1.4.1.24681.1.2.5.0 | awk '{print $4}' | cut -c2-3)
-	OUTPUT="CPU Temperature="$TEMP0"C|NAS CPUtermperature="$TEMP0"C;$strWarning;$strCritical;0;90"
-
-    	if [ "$TEMP0" -ge "89" ]; then
-            	echo "Cpu temperatur to high!: "$OUTPUT
-            	exit 2
-    	else
-            	if [ $TEMP0 -ge "$strCritical" ]; then
-                    	echo "CRITICAL: "$OUTPUT
-                    	exit 2
-            	fi
-            	if [ $TEMP0 -ge "$strWarning" ]; then
-                    	echo "WARNING: "$OUTPUT
-                    	exit 1
-            	fi
-            	echo "OK: "$OUTPUT
-            	exit 0
-    	fi
 
 # Free RAM---------------------------------------------------------------------------------------------------------------------------------------
 elif [ "$strpart" == "freeram" ]; then
@@ -298,89 +278,6 @@ elif [ "$strpart" == "hd4temp" ]; then
             	exit 0
     	fi
 
-# HD5 Temperature---------------------------------------------------------------------------------------------------------------------------------------
-elif [ "$strpart" == "hd5temp" ]; then
-    	TEMPHD=$(snmpget -v2c -c "$strCommunity" $strHostname 1.3.6.1.4.1.24681.1.2.11.1.3.5 | awk '{print $4}' | cut -c2-3)
-	OUTPUT="Temperature="$TEMPHD"C|HDD5 termperature="$TEMPHD"C;$strWarning;$strCritical;0;60"
-
-    	if [ "$TEMPHD" -ge "59" ]; then
-            	echo "HDD5 temperatur to high!: "$OUTPUT
-            	exit 2
-    	else
-            	if [ $TEMPHD -ge "$strCritical" ]; then
-                    	echo "CRITICAL: "$OUTPUT
-                    	exit 2
-            	fi
-            	if [ $TEMPHD -ge "$strWarning" ]; then
-                    	echo "WARNING: "$OUTPUT
-                    	exit 1
-            	fi
-            	echo "OK: "$OUTPUT
-            	exit 0
-    	fi
-
-# HD6 Temperature---------------------------------------------------------------------------------------------------------------------------------------
-elif [ "$strpart" == "hd6temp" ]; then
-        TEMPHD=$(snmpget -v2c -c "$strCommunity" $strHostname 1.3.6.1.4.1.24681.1.2.11.1.3.6 | awk '{print $4}' | cut -c2-3)
-        OUTPUT="Temperature="$TEMPHD"C|HDD6 termperature="$TEMPHD"C;$strWarning;$strCritical;0;60"
-
-        if [ "$TEMPHD" -ge "59" ]; then
-                echo "HDD6 temperatur to high!: "$OUTPUT
-                exit 2
-        else
-                if [ $TEMPHD -ge "$strCritical" ]; then
-                        echo "CRITICAL: "$OUTPUT
-                        exit 2
-                fi
-                if [ $TEMPHD -ge "$strWarning" ]; then
-                        echo "WARNING: "$OUTPUT
-                        exit 1
-                fi
-                echo "OK: "$OUTPUT
-                exit 0
-        fi
-
-# HD7 Temperature---------------------------------------------------------------------------------------------------------------------------------------
-elif [ "$strpart" == "hd7temp" ]; then
-        TEMPHD=$(snmpget -v2c -c "$strCommunity" $strHostname 1.3.6.1.4.1.24681.1.2.11.1.3.7 | awk '{print $4}' | cut -c2-3)
-        OUTPUT="Temperature="$TEMPHD"C|HDD7 termperature="$TEMPHD"C;$strWarning;$strCritical;0;60"
-
-        if [ "$TEMPHD" -ge "59" ]; then
-                echo "HDD7 temperatur to high!: "$OUTPUT
-                exit 2
-        else
-                if [ $TEMPHD -ge "$strCritical" ]; then
-                        echo "CRITICAL: "$OUTPUT
-                        exit 2
-                fi
-                if [ $TEMPHD -ge "$strWarning" ]; then
-                        echo "WARNING: "$OUTPUT
-                        exit 1
-                fi
-                echo "OK: "$OUTPUT
-                exit 0
-        fi
-
-# HD8 Temperature---------------------------------------------------------------------------------------------------------------------------------------
-elif [ "$strpart" == "hd8temp" ]; then
-        TEMPHD=$(snmpget -v2c -c "$strCommunity" $strHostname 1.3.6.1.4.1.24681.1.2.11.1.3.8 | awk '{print $4}' | cut -c2-3)
-        OUTPUT="Temperature="$TEMPHD"C|HDD8 termperature="$TEMPHD"C;$strWarning;$strCritical;0;60"
-
-        if [ "$TEMPHD" -ge "59" ]; then
-                echo "HDD8 temperatur to high!: "$OUTPUT
-                exit 2
-        else
-                if [ $TEMPHD -ge "$strCritical" ]; then
-                        echo "CRITICAL: "$OUTPUT
-                        exit 2
-                fi
-                if [ $TEMPHD -ge "$strWarning" ]; then
-                        echo "WARNING: "$OUTPUT
-                        exit 1
-                fi
-                echo "OK: "$OUTPUT
-                exit 0
-        fi
 
 # Volume 1 Status----------------------------------------------------------------------------------------------------------------------------------------
 elif [ "$strpart" == "vol1status" ]; then
@@ -633,10 +530,10 @@ elif [ "$strpart" == "powerstatus" ]; then
 
 # System Uptime----------------------------------------------------------------------------------------------------------------------------------------
 elif [ "$strpart" == "systemuptime" ]; then
-    	netuptime=$(snmpget -v2c -c "$strCommunity" "$strHostname" .1.3.6.1.2.1.1.3.0 | awk '{print $5, $6, $7, $8}')
-    	sysuptime=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.2.1.25.1.1.0 | awk '{print $5, $6, $7, $8}') 
+    	sysuptime=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.2.1.1.3.0  | awk '{print $5,$6,$7}' | cut -d . -f 1
     	
-	echo System Uptime $sysuptime - Network Uptime $netuptime
+    	
+	echo System Uptime $sysuptime
 	exit 0
 
 # System Info------------------------------------------------------------------------------------------------------------------------------------------
