@@ -1,6 +1,6 @@
 #!/bin/bash
 ############################# Written and Manteined by vincent kocher     ###############
-#
+# wget https://raw.githubusercontent.com/syswombat/icinga2/master/gude/epc8220/check_epc8220.sh
 #	copyright (c) 2018 Vincent Kocher 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
