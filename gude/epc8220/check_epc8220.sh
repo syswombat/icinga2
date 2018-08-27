@@ -777,10 +777,9 @@ elif [ "$strpart" == "fans" ]; then
 
 # System Uptime----------------------------------------------------------------------------------------------------------------------------------------
 elif [ "$strpart" == "systemuptime" ]; then
-    	netuptime=$(snmpget -v2c -c "$strCommunity" "$strHostname" .1.3.6.1.2.1.1.3.0 | awk '{print $5, $6, $7, $8}')
     	sysuptime=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.2.1.1.3.0  | awk '{print $5,$6,$7}' | cut -d . -f 1) 
     	
-	echo System Uptime $sysuptime - Network Uptime $netuptime
+	echo System Uptime $sysuptime
 	exit 0
 
 # System Info------------------------------------------------------------------------------------------------------------------------------------------
