@@ -1,6 +1,7 @@
 #!/bin/bash
 ############################# Written and Manteined by vincent kocher     ###############
 # wget https://raw.githubusercontent.com/syswombat/icinga2/master/gude/epc8220/check_epc8220.sh
+# chmod +x check_epc8220.sh
 #	copyright (c) 2018 Vincent Kocher 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,14 +14,14 @@
 #
 ##########################################################################################
 #Version 0.0.1
-plgVer=0.0.1a
+plgVer=0.0.1b
 
 if [ ! "$#" == "5" ]; then
         echo
         echo "check_epc8220 - Version: "$plgVer
         echo
       	echo
-        echo " Example for fans: ./check_epc8220.sh 127.0.0.1 public systemuptime"
+        echo " Example for fans: ./check_epc8220.sh 10.147.42.31 public systemuptime"
 	echo
         exit 3
 fi
@@ -42,13 +43,13 @@ fi
 
 # System Uptime----------------------------------------------------------------------------------------------------------------------------------------
 #                             snmpget -v 2c -c public 10.147.42.31  1.3.6.1.2.1.1.3.0  | awk '{print $5,$6,$7}' | cut -d . -f 1
-elif [ "$strpart" == "systemuptime" ]; then
+if [ "$strpart" == "systemuptime" ]; then
     	sysuptime=$(snmpget -v 2c -c "$strCommunity" "$strHostname" 1.3.6.1.2.1.1.3.0  | awk '{print $5,$6,$7}' | cut -d . -f 1
     	
     	
 	echo System Uptime $sysuptime
 	exit 0
-
+fi
 # System Info------------------------------------------------------------------------------------------------------------------------------------------
 elif [ "$strpart" == "sysinfo" ]; then
 	model=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.4.1.24681.1.2.12.0 | awk '{print $4}' | sed 's/^"\(.*\).$/\1/')
