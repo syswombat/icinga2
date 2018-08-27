@@ -40,16 +40,71 @@ echo "CRITICAL: SNMP to $strHostname is not available or wrong community string"
 exit 2; 
 fi
 
+# DISKUSED ---------------------------------------------------------------------------------------------------------------------------------------
+if [ "$strpart" == "diskused" ]; then
+	disk=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.4.1 | awk '{print $4}' | sed 's/.\(.*\)/\1/')
+	free=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.5.1 | awk '{print $4}' | sed 's/.\(.*\)/\1/')
+	UNITtest=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.4.1 | awk '{print $5}' | sed 's/.*\(.B\).*/\1/')
+	UNITtest2=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.5.1 | awk '{print $5}' | sed 's/.*\(.B\).*/\1/')
+        #echo $disk - $free - $UNITtest - $UNITtest2 
+
+	if [ "$UNITtest" == "TB" ]; then
+	 factor=$(echo "scale=0; 1000" | bc -l)
+	elif [ "$UNITtest" == "GB" ]; then
+	 factor=$(echo "scale=0; 100" | bc -l)	 
+	else
+	 factor=$(echo "scale=0; 1" | bc -l)
+	fi
+
+	if [ "$UNITtest2" == "TB" ]; then
+	 factor2=$(echo "scale=0; 1000" | bc -l)
+	elif [ "$UNITtest2" == "GB" ]; then
+	 factor2=$(echo "scale=0; 100" | bc -l)
+	else
+	 factor2=$(echo "scale=0; 1" | bc -l)
+	fi
+	
+	#echo $factor - $factor2
+	disk=$(echo "scale=0; $disk*$factor" | bc -l)
+	free=$(echo "scale=0; $free*$factor2" | bc -l)
+	
+	#debug used=$(echo "scale=0; 9000*1000" | bc -l) 
+	used=$(echo "scale=0; $disk-$free" | bc -l)
+	
+	#echo $disk - $free - $used
+	PERC=$(echo "scale=0; $used*100/$disk" | bc -l)
+	
+	diskF=$(echo "scale=0; $disk/$factor" | bc -l)
+	freeF=$(echo "scale=0; $free/$factor" | bc -l)
+	usedF=$(echo "scale=0; $used/$factor" | bc -l)
+
+	#wdisk=$(echo "scale=0; $strWarning*$disk/100" | bc -l)
+	#cdisk=$(echo "scale=0; $strCritical*$disk/100" | bc -l)
+	
+        OUTPUT="Total:"$diskF"$UNITtest - Used:"$usedF"$UNITtest - Free:"$freeF"$UNITtest2 - Used Space: $PERC%|Used=$PERC;$strWarning;$strCritical;0;100"
+	
+	if [ $PERC -ge $strCritical ]; then
+		echo "CRITICAL: "$OUTPUT
+		exit 2
+	elif [ $PERC -ge $strWarning ]; then
+		echo "WARNING: "$OUTPUT
+		exit 1
+	else
+		echo "OK: "$OUTPUT
+		exit 0
+	fi
+
+
 
 # System Uptime----------------------------------------------------------------------------------------------------------------------------------------
 #                             snmpget -v 2c -c public 10.147.42.31  1.3.6.1.2.1.1.3.0  | awk '{print $5,$6,$7}' | cut -d . -f 1
-if [ "$strpart" == "systemuptime" ]; then
+elif [ "$strpart" == "systemuptime" ]; then
     	sysuptime=$(snmpget -v 2c -c "$strCommunity" "$strHostname" 1.3.6.1.2.1.1.3.0  | awk '{print $5,$6,$7}' | cut -d . -f 1
     	
     	
 	echo System Uptime $sysuptime
 	exit 0
-fi
+	
 # System Info------------------------------------------------------------------------------------------------------------------------------------------
 elif [ "$strpart" == "sysinfo" ]; then
 	model=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.4.1.24681.1.2.12.0 | awk '{print $4}' | sed 's/^"\(.*\).$/\1/')
