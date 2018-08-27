@@ -1,11 +1,7 @@
 #!/bin/bash
-############################# Written and Manteined by Nicola Bandini     ###############
-############################# Created and written by Matthias Luettermann ###############
-############################# finetuning by primator@gmail.com
-############################# finetuning by n.bandini@gmail.com
-############################# with code by Tom Lesniak, Hugo Geijteman and Jon Marston
+############################# Written and Manteined by Vincent Kocher     ###############
 #
-#	copyright (c) 2008 Shahid Iqbal
+#	copyright (c) 2018 vincent kocher 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; 
@@ -15,9 +11,9 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# contact the author directly for more information at: matthias@xcontrol.de
+# contact the author directly for more information at: vkocher@kozo.ch
 ##########################################################################################
-#Version 1.23.1
+#Version 0.0.1c
 plgVer=0.0.1c
 
 if [ ! "$#" == "5" ]; then
