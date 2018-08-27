@@ -18,27 +18,14 @@
 # contact the author directly for more information at: matthias@xcontrol.de
 ##########################################################################################
 #Version 1.23.1
-plgVer=1.23.1
+plgVer=0.0.1c
 
 if [ ! "$#" == "5" ]; then
         echo
-        echo "Check_QNAP3 "$plgVer
+        echo "Check_epc8220 - Version: "$plgVer
         echo
-    	echo "Warning: Wrong command line arguments."
-        echo
-	echo "Usage: ./check_qnap <hostname> <community> <part> <warning> <critical>"
-        echo
-	echo "Parts are: sysinfo, systemuptime, temp, cpu, cputemp, freeram, powerstatus, fans, diskused, hdstatus, hd#status, hdtemp, hd#temp, volstatus (Raid Volume Status), vol#status"
-        echo
-	echo "hdstatus shows status & temp; volstatus check all vols and vols space; powerstatus check power supply"
-        echo "<#> is 1-8 for hd, 1-5 for vol"
 	echo
-        echo " Example for diskusage: ./check_qnap3.sh 127.0.0.1 public diskused 80 95"
-	echo
-	echo " Example for volstatus: ./check_qnap3.sh 127.0.0.1 public volstatus 15 10"
-	echo "                        critical and warning value are releted to free disk space"
-	echo
-	echo " Example for fans: ./check_qnap3.sh 127.0.0.1 public fans 2000 1900"
+	echo " Example for fans: ./check_epc8220.sh 10.147.42.31 public systemuptime 0 0"
 	echo "                   critical and warning are minimum speed in rpm for fans"
 	echo
         exit 3
@@ -785,8 +772,6 @@ elif [ "$strpart" == "systemuptime" ]; then
 # System Info------------------------------------------------------------------------------------------------------------------------------------------
 elif [ "$strpart" == "sysinfo" ]; then
 	model=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.4.1.24681.1.2.12.0 | awk '{print $4}' | sed 's/^"\(.*\).$/\1/')
-	hdnum=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.4.1.24681.1.2.10.0 | awk '{print $4}')
-	VOLCOUNT=$(snmpget -v2c -c "$strCommunity" "$strHostname" .1.3.6.1.4.1.24681.1.2.16.0 | awk '{print $4}')
 	name=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.4.1.24681.1.2.13.0  | awk '{print $4}' | sed 's/^"\(.*\)$/\1/')
 	firmware=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.2.1.47.1.1.1.1.9.1 | awk '{print $4}' | sed 's/^"\(.*\)$/\1/')
 
