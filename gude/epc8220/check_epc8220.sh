@@ -14,8 +14,8 @@
 # contact the author directly for more information at: vkocher@kozo.ch
 ##########################################################################################
 #Version 0.0.1c
-plgVer=0.0.1c
-plglastmodi=27.08.2018 - 09:40
+plgVer=0.0.1d
+# plglastmodi=27.08.2018 - 09:40
 
 if [ ! "$#" == "5" ]; then
         echo
@@ -44,8 +44,17 @@ echo "CRITICAL: SNMP to $strHostname is not available or wrong community string"
 exit 2; 
 fi
 
+# System Info------------------------------------------------------------------------------------------------------------------------------------------
+# snmpwalk -v 2c -c public 10.147.42.31 1.3.6.1.2.1.1.1.0  | awk '{print $4,$5,$6,$7}'
+if [ "$strpart" == "sysinfo" ]; then
+	model=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.2.1.1.1.0  | awk '{print $4,$5,$6,$7}'
+	
+	echo Model $model
+	exit 0
+
+
 # DISKUSED ---------------------------------------------------------------------------------------------------------------------------------------
-if [ "$strpart" == "diskused" ]; then
+elif [ "$strpart" == "diskused" ]; then
 	disk=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.4.1 | awk '{print $4}' | sed 's/.\(.*\)/\1/')
 	free=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.5.1 | awk '{print $4}' | sed 's/.\(.*\)/\1/')
 	UNITtest=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.4.1 | awk '{print $5}' | sed 's/.*\(.B\).*/\1/')
@@ -768,14 +777,7 @@ elif [ "$strpart" == "systemuptime" ]; then
 	echo System Uptime $sysuptime
 	exit 0
 
-# System Info------------------------------------------------------------------------------------------------------------------------------------------
-elif [ "$strpart" == "sysinfo" ]; then
-	model=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.4.1.24681.1.2.12.0 | awk '{print $4}' | sed 's/^"\(.*\).$/\1/')
-	name=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.4.1.24681.1.2.13.0  | awk '{print $4}' | sed 's/^"\(.*\)$/\1/')
-	firmware=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.2.1.47.1.1.1.1.9.1 | awk '{print $4}' | sed 's/^"\(.*\)$/\1/')
 
-	echo NAS $name, Model $model, Firmware $firmware, Max HD number $hdnum, No. Volume $VOLCOUNT
-	exit 0
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 else
