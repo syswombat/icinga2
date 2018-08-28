@@ -25,8 +25,8 @@ if [ ! "$#" == "5" ]; then
 	echo " Example for fans: ./check_epc8220.sh 10.147.42.31 public systemuptime 0 0"
 	echo "                   critical and warning are minimum speed in rpm for fans"
 	echo
-	echo " working is: systemuptime, "
-	echo " needed:     A-bank-current (active W), B-bank-current (active W), system, A-bank-total, B-bank-total "
+	echo " working is: systemuptime, system Info, "
+	echo " needed:     A-bank-current (active W), B-bank-current (active W), A-bank-total, B-bank-total "
         exit 3
 fi
 
@@ -47,7 +47,7 @@ fi
 # System Info------------------------------------------------------------------------------------------------------------------------------------------
 # snmpwalk -v 2c -c public 10.147.42.31 1.3.6.1.2.1.1.1.0  | awk '{print $4,$5,$6,$7}'
 if [ "$strpart" == "sysinfo" ]; then
-	model=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.2.1.1.1.0  | awk '{print $4,$5,$6,$7}'
+	model=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.2.1.1.1.0  | awk '{print $4,$5,$6,$7}')
 	
 	echo Model $model
 	exit 0
