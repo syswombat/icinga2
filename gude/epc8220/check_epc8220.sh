@@ -57,7 +57,7 @@ if [ "$strpart" == "sysinfo" ]; then
 elif [ "$strpart" == "ABC" ]; then
       ABankC=$(snmpget -v 2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.28507.38.1.5.1.2.1.4.1 | awk '{print $4}')
       
-      echo $ABankC
+      echo $ABankC"$PERFOUTPUT
       exit 0
       
 # System Uptime----------------------------------------------------------------------------------------------------------------------------------------
