@@ -57,8 +57,8 @@ if [ "$strpart" == "sysinfo" ]; then
 elif [ "$strpart" == "ABC" ]; then
       ABankC=$(snmpget -v 2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.28507.38.1.5.1.2.1.4.1 | awk '{print $4}')
       
-      OUTPUT=$ABankC
-      echo A-Bank current USV $ABankC
+      OUTPUT="A-Bank current"$ABankC
+      echo A-Bank current USV $OUTPUT
       exit 0
 
 
