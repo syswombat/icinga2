@@ -55,10 +55,10 @@ fi
 
 # Current A-bank------------------------------------------------------------------------------------------------------------------------------------------
 # snmpwalk -v 2c -c public 10.147.42.31 iso.3.6.1.4.1.28507.38.1.5.1.2.1.4.1 | awk '{print $4}'
-elif [ "$strpart" == "A-bank-current" ]; then
-      A-bank-current=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.28507.38.1.5.1.2.1.4.1 | awk '{print $4}')
+elif [ "$strpart" == "ABC" ]; then
+      ABankC=$(snmpget -v 2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.28507.38.1.5.1.2.1.4.1 | awk '{print $4}')
 
-      echo A-Bank current USV $A-bank-current
+      echo A-Bank current USV $ABankC
       exit 0
 fi
 
