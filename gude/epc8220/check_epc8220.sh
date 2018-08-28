@@ -51,7 +51,7 @@ if [ "$strpart" == "sysinfo" ]; then
 	
 	echo Model $model
 	exit 0
-
+fi
 
 # Current A-bank------------------------------------------------------------------------------------------------------------------------------------------
 # snmpwalk -v 2c -c public 10.147.42.31 iso.3.6.1.4.1.28507.38.1.5.1.2.1.4.1 | awk '{print $4}'
@@ -60,7 +60,7 @@ elif [ "$strpart" == "A-bank-current" ]; then
 
       echo A-Bank current USV $A-bank-current
       exit 0
-
+fi
 
 # DISKUSED ---------------------------------------------------------------------------------------------------------------------------------------
 elif [ "$strpart" == "diskused" ]; then
