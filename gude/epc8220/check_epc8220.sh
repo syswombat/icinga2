@@ -57,9 +57,15 @@ if [ "$strpart" == "sysinfo" ]; then
 elif [ "$strpart" == "ABC" ]; then
       ABankC=$(snmpget -v 2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.28507.38.1.5.1.2.1.4.1 | awk '{print $4}')
       
-      OUTPUT="A-Bank current"$ABankC
-      echo A-Bank current USV $OUTPUT
+      echo $ABankC
       exit 0
+      
+# System Uptime----------------------------------------------------------------------------------------------------------------------------------------
+elif [ "$strpart" == "systemuptime" ]; then
+    	sysuptime=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.2.1.1.3.0  | awk '{print $5,$6,$7}' | cut -d . -f 1) 
+    	
+	echo Uptime $sysuptime
+	exit 0
 
 
 # DISKUSED ---------------------------------------------------------------------------------------------------------------------------------------
@@ -778,13 +784,6 @@ elif [ "$strpart" == "fans" ]; then
      else
         exit 0
      fi
-
-# System Uptime----------------------------------------------------------------------------------------------------------------------------------------
-elif [ "$strpart" == "systemuptime" ]; then
-    	sysuptime=$(snmpget -v2c -c "$strCommunity" "$strHostname"  .1.3.6.1.2.1.1.3.0  | awk '{print $5,$6,$7}' | cut -d . -f 1) 
-    	
-	echo Uptime $sysuptime
-	exit 0
 
 
 
