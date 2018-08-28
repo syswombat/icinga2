@@ -26,7 +26,7 @@ if [ ! "$#" == "5" ]; then
 	echo "                   critical and warning are minimum speed in rpm for fans"
 	echo
 	echo " working is: systemuptime, "
-	echo " needed:     A-bank, B-bank, system "
+	echo " needed:     A-bank-current (active W), B-bank-current (active W), system, A-bank-total, B-bank-total "
         exit 3
 fi
 
