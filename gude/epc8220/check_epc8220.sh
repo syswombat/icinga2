@@ -15,16 +15,18 @@
 ##########################################################################################
 #Version 0.0.1c
 plgVer=0.0.1c
-plglastmodi=27.08.2018
+plglastmodi=27.08.2018 - 09:40
 
 if [ ! "$#" == "5" ]; then
         echo
-        echo "Check_epc8220 - Version: "$plgVer " "  $plglastmodi
+        echo "check_epc8220 - Version/Last change: "$plgVer " / "  $plglastmodi
         echo
 	echo
 	echo " Example for fans: ./check_epc8220.sh 10.147.42.31 public systemuptime 0 0"
 	echo "                   critical and warning are minimum speed in rpm for fans"
 	echo
+	echo " working is: systemuptime, "
+	echo " needed:     A-bank, B-bank, system "
         exit 3
 fi
 
