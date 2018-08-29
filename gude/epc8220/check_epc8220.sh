@@ -15,7 +15,7 @@
 ##########################################################################################
 #Version 0.0.1e
 plgVer=0.0.1fa
-plglastmodi='29.08.2018 - 11:14 line 76'
+plglastmodi='29.08.2018 - 21:01 line 76-78'
 
 if [ ! "$#" == "5" ]; then
         echo "==========================================================================================="
@@ -73,9 +73,11 @@ if [ "$strpart" == "sysinfo" ]; then
 elif [ "$strpart" == "ABC" ]; then
       ABankC=$(snmpget -v 2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.28507.38.1.5.1.2.1.4.1 | awk '{print $4}')
       
-      OUTPUT="ABankcurrent="$ABankC"|ABank="$ABankC";$strWarning;$strCritical;;"
-      echo ABankC $ABankC
-      exit 0
+       OUTPUT="ABankcurrent="$ABankC"|A-Bank - Power active current watt="$ABankC";$strWarning;$strCritical;"
+       echo ABankC $ABankC
+       echo test $OUTPUT
+ 
+ 	exit 0
       
 # System Uptime----------------------------------------------------------------------------------------------------------------------------------------
 elif [ "$strpart" == "systemuptime" ]; then
@@ -83,100 +85,6 @@ elif [ "$strpart" == "systemuptime" ]; then
     	
 	echo Uptime $sysuptime
 	exit 0
-
-
-# DISKUSED ---------------------------------------------------------------------------------------------------------------------------------------
-elif [ "$strpart" == "diskused" ]; then
-	disk=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.4.1 | awk '{print $4}' | sed 's/.\(.*\)/\1/')
-	free=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.5.1 | awk '{print $4}' | sed 's/.\(.*\)/\1/')
-	UNITtest=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.4.1 | awk '{print $5}' | sed 's/.*\(.B\).*/\1/')
-	UNITtest2=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.24681.1.2.17.1.5.1 | awk '{print $5}' | sed 's/.*\(.B\).*/\1/')
-        #echo $disk - $free - $UNITtest - $UNITtest2 
-
-	if [ "$UNITtest" == "TB" ]; then
-	 factor=$(echo "scale=0; 1000" | bc -l)
-	elif [ "$UNITtest" == "GB" ]; then
-	 factor=$(echo "scale=0; 100" | bc -l)	 
-	else
-	 factor=$(echo "scale=0; 1" | bc -l)
-	fi
-
-	if [ "$UNITtest2" == "TB" ]; then
-	 factor2=$(echo "scale=0; 1000" | bc -l)
-	elif [ "$UNITtest2" == "GB" ]; then
-	 factor2=$(echo "scale=0; 100" | bc -l)
-	else
-	 factor2=$(echo "scale=0; 1" | bc -l)
-	fi
-	
-	#echo $factor - $factor2
-	disk=$(echo "scale=0; $disk*$factor" | bc -l)
-	free=$(echo "scale=0; $free*$factor2" | bc -l)
-	
-	#debug used=$(echo "scale=0; 9000*1000" | bc -l) 
-	used=$(echo "scale=0; $disk-$free" | bc -l)
-	
-	#echo $disk - $free - $used
-	PERC=$(echo "scale=0; $used*100/$disk" | bc -l)
-	
-	diskF=$(echo "scale=0; $disk/$factor" | bc -l)
-	freeF=$(echo "scale=0; $free/$factor" | bc -l)
-	usedF=$(echo "scale=0; $used/$factor" | bc -l)
-
-	#wdisk=$(echo "scale=0; $strWarning*$disk/100" | bc -l)
-	#cdisk=$(echo "scale=0; $strCritical*$disk/100" | bc -l)
-	
-        OUTPUT="Total:"$diskF"$UNITtest - Used:"$usedF"$UNITtest - Free:"$freeF"$UNITtest2 - Used Space: $PERC%|Used=$PERC;$strWarning;$strCritical;0;100"
-	
-	if [ $PERC -ge $strCritical ]; then
-		echo "CRITICAL: "$OUTPUT
-		exit 2
-	elif [ $PERC -ge $strWarning ]; then
-		echo "WARNING: "$OUTPUT
- 		exit 1
-	else
-		echo "OK: "$OUTPUT
-		exit 0
-	fi
-
-	
-# CPU ----------------------------------------------------------------------------------------------------------------------------------------------
-elif [ "$strpart" == "cpu" ]; then
-        CPU=$(snmpget -v2c -Ln -c "$strCommunity" $strHostname 1.3.6.1.4.1.24681.1.2.1.0 -Oqv | sed -E 's/"|\s%//g')
-
-        OUTPUT="CPU Load="$CPU"%|CPU load="$CPU"%;$strWarning;$strCritical;0;100"
-
-        if (( $(echo "$CPU > $strCritical" | bc -l) )); then
-               echo "CRITICAL: "$OUTPUT
-               exit 2
-        elif ((  $(echo "$CPU > $strWarning" | bc -l) )); then
-                echo "WARNING: "$OUTPUT
-                exit 1
-        else
-                echo "OK: "$OUTPUT
-                exit 0
-        fi
-	
-# CPUTEMP ----------------------------------------------------------------------------------------------------------------------------------------------
-elif [ "$strpart" == "cputemp" ]; then
-    	TEMP0=$(snmpget -v2c -c "$strCommunity" $strHostname  .1.3.6.1.4.1.24681.1.2.5.0 | awk '{print $4}' | cut -c2-3)
-	OUTPUT="CPU Temperature="$TEMP0"C|NAS CPUtermperature="$TEMP0"C;$strWarning;$strCritical;0;90"
-
-    	if [ "$TEMP0" -ge "89" ]; then
-            	echo "Cpu temperatur to high!: "$OUTPUT
-            	exit 2
-    	else
-            	if [ $TEMP0 -ge "$strCritical" ]; then
-                    	echo "CRITICAL: "$OUTPUT
-                    	exit 2
-            	fi
-            	if [ $TEMP0 -ge "$strWarning" ]; then
-                    	echo "WARNING: "$OUTPUT
-                    	exit 1
-            	fi
-            	echo "OK: "$OUTPUT
-            	exit 0
-    	fi
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 else
