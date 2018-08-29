@@ -133,7 +133,7 @@ elif [ "$strpart" == "diskused" ]; then
 		exit 2
 	elif [ $PERC -ge $strWarning ]; then
 		echo "WARNING: "$OUTPUT
-		exit 1
+ 		exit 1
 	else
 		echo "OK: "$OUTPUT
 		exit 0
@@ -180,6 +180,6 @@ elif [ "$strpart" == "cputemp" ]; then
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 else
-    	echo -e "\nUnknown Part!" && exit "3"
+    	echo -e "\nUnknown Part! " && exit "3"
 fi
 exit 0
