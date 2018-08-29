@@ -38,6 +38,7 @@ if [ ! "$#" == "5" ]; then
 	echo " needed:     B-bank-current (active W), A-bank-total, B-bank-total "
 	echo
         echo 
+	echo "============================================================================================="
         exit 3
 fi
 
