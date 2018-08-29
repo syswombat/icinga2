@@ -27,12 +27,12 @@ if [ ! "$#" == "5" ]; then
 	echo
 	echo
 	echo "  Example for systemuptim: ./check_epc8220.sh 10.147.42.31 public systemuptime 0 0"
-	echo "                   critical and warning are minimum speed in rpm for fans"
+	echo "                   critical and warning musst not be empty"
 	echo
 	echo " working is:"		
         echo " systemuptime | system Uptime " 		
         echo " sysinfo      | system Information "
-        echo " ABC          | Bank B - Power active W
+        echo " ABC          | Bank B - Power active W "
         echo
         echo
 	echo " needed:     B-bank-current (active W), A-bank-total, B-bank-total "
