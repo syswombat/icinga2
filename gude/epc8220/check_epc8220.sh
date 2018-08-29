@@ -15,7 +15,7 @@
 ##########################################################################################
 #Version 0.0.1e
 plgVer=0.0.1fa
-plglastmodi='29.08.2018 - 10:46'
+plglastmodi='29.08.2018 - 10:55'
 
 if [ ! "$#" == "5" ]; then
         echo "==========================================================================================="
@@ -73,7 +73,7 @@ if [ "$strpart" == "sysinfo" ]; then
 elif [ "$strpart" == "ABC" ]; then
       ABankC=$(snmpget -v 2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.28507.38.1.5.1.2.1.4.1 | awk '{print $4}')
       
-      OUTPUT="ABankcurrent="$ABankC"|ABank="$ABankC";$strWarning;$strCritical;0;90"
+      OUTPUT="ABankcurrent="$ABankC"|ABank="$ABankC";$strWarning;$strCritical;;"
       echo $OUTPUT
       exit 0
       
