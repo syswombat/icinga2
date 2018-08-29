@@ -52,7 +52,7 @@ strpart=$3
 strWarning=$4
 strCritical=$5
 
-# Check if QNAP is online
+# Check if Power Control is online
 TEST=$(snmpstatus -v2c $strHostname -c "$strCommunity" -t 5 -r 0 2>&1) 
 # echo "Test: $TEST"; 
 if [ "$TEST" == "Timeout: No Response from $strHostname" ]; then 
