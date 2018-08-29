@@ -18,8 +18,9 @@ plgVer=0.0.1f
 plglastmodi='29.08.2018 - 09:30'
 
 if [ ! "$#" == "5" ]; then
-        echo
-	echo
+        echo "==========================================================================================="
+	echo "some information about this plugin:"
+	echo "-----------------------------------"
         echo "  check_epc8220 - Version/Last change: "$plgVer " / "  $plglastmodi
         echo "  Plugin will show some Information about the Gude Expert Power Controll 8220-1"
 	echo
