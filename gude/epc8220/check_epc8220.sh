@@ -14,7 +14,7 @@
 # contact the author directly for more information at: vkocher@kozo.ch
 ##########################################################################################
 #Version 0.0.1e
-plgVer=0.0.1f
+plgVer=0.0.1fa
 plglastmodi='29.08.2018 - 09:30'
 
 if [ ! "$#" == "5" ]; then
