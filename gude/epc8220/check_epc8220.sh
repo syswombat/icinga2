@@ -22,8 +22,9 @@ if [ ! "$#" == "5" ]; then
 	echo "some information about this plugin:"
 	echo "-----------------------------------"
 	echo
-        echo "  check_epc8220 - Version/Last change: "$plgVer " / "  $plglastmodi
-        echo "  Plugin will show some Information about the Gude Expert Power Controll 8220-1"
+        echo "  check_epc8220.sh - Version/Last change: "$plgVer " / "  $plglastmodi
+        echo
+	echo "  Plugin will show some Information about the Gude Expert Power Controll 8220-1"
 	echo
 	echo
 	echo "  Example for systemuptim: ./check_epc8220.sh 10.147.42.31 public systemuptime 0 0"
