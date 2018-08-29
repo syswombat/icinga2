@@ -14,19 +14,28 @@
 # contact the author directly for more information at: vkocher@kozo.ch
 ##########################################################################################
 #Version 0.0.1e
-plgVer=0.0.1e
-# plglastmodi=27.08.2018 - 15:50
+plgVer=0.0.1f
+plglastmodi='29.08.2018 - 09:30'
 
 if [ ! "$#" == "5" ]; then
         echo
-        echo "check_epc8220 - Version/Last change: "$plgVer " / "  $plglastmodi
-        echo
 	echo
-	echo " Example for fans: ./check_epc8220.sh 10.147.42.31 public systemuptime 0 0"
+        echo "  check_epc8220 - Version/Last change: "$plgVer " / "  $plglastmodi
+        echo "  Plugin will show some Information about the Gude Expert Power Controll 8220-1"
+	echo
+	echo
+	echo "  Example for systemuptim: ./check_epc8220.sh 10.147.42.31 public systemuptime 0 0"
 	echo "                   critical and warning are minimum speed in rpm for fans"
 	echo
-	echo " working is: systemuptime, system Info, "
-	echo " needed:     A-bank-current (active W), B-bank-current (active W), A-bank-total, B-bank-total "
+	echo " working is:		
+        echo " systemuptime | system Uptime " 		
+        echo " sysinfo      | system Information "
+        echo " ABC          | Bank B - Power active W
+        echo
+        echo
+	echo " needed:     B-bank-current (active W), A-bank-total, B-bank-total "
+	echo
+        echo 
         exit 3
 fi
 
