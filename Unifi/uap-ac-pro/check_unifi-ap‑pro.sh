@@ -56,11 +56,14 @@ exit 2;
 fi
 
 # System Info------------------------------------------------------------------------------------------------------------------------------------------
-# snmpwalk -v 2c -c public 10.147.42.31 1.3.6.1.2.1.1.1.0  | awk '{print $4,$5,$6,$7}'
+# snmpwalk -v 2c -c public 10.147.42.54 .1.3.6.1.4.1.41112.1.6.3.3.0  | awk '{print $4}'
+# snmpwalk -v 2c -c public 10.147.42.54 .1.3.6.1.4.1.41112.1.6.3.6.0  | awk '{print $4}'
 if [ "$strpart" == "sysinfo" ]; then
-	model=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.2.1.1.1.0  | awk '{print $4,$5,$6,$7}')
+	  model=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.41112.1.6.3.3.0  | awk '{print $4}')
+	version=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.41112.1.6.3.6.0  | awk '{print $4}')
 	
 	echo Model $model
+	echo Version $version
 	exit 0
 
 # Current A-bank------------------------------------------------------------------------------------------------------------------------------------------
