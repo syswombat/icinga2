@@ -61,9 +61,11 @@ fi
 if [ "$strpart" == "sysinfo" ]; then
 	  model=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.41112.1.6.3.3.0  | awk '{print $4}')
 	version=$(snmpget -v2c -c "$strCommunity" "$strHostname" 1.3.6.1.4.1.41112.1.6.3.6.0  | awk '{print $4}')
+	time=$ (snmpget -v2c -c "$strCommunity" "$strHostname"  1.3.6.1.2.1.1.3  | awk '{print $5,$6,$7}'
 	
 	echo Model $model
 	echo Version $version
+	echo time $time
 	exit 0
 
 # Current A-bank------------------------------------------------------------------------------------------------------------------------------------------
