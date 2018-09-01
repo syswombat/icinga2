@@ -31,14 +31,9 @@ if [ ! "$#" == "5" ]; then
 	echo "                   critical and warning musst not be empty"
 	echo
 	echo " working is:"		
-        echo "   systemuptime | system Uptime " 		
-        echo "   sysinfo      | system Information "
-        echo "   ABC          | A - Bank - Power active W Current"
 	echo 
 	echo " not yet finished "
-        echo "   BBC          | B - Bank - Power active W Current"
-	echo "   ABT          | A - Bank - Power Total "
-	echo "   BBT          | B - Bank - Power Total "
+        echo " user Connected"    .1.3.6.1.4.1.41112.1.6.1.2.1.8
 	echo
 	echo
 	echo 
