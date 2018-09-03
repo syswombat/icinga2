@@ -34,8 +34,8 @@ if [ ! "$#" == "5" ]; then
 	echo 
 	echo " not yet finished "
         echo " user Connected"    .1.3.6.1.4.1.41112.1.6.1.2.1.8
-	echo
-	echo
+	echo  
+	echo  " | awk '{MB=$1/1024; print $MB}'"
 	echo 
 	echo "============================================================================================="
         exit 3
